@@ -31,15 +31,19 @@ import nu.xom.Node;
 public class TaskImpl implements ITask, Comparable {
 
     private Element _element = null;
+    /*TASK 3-1 SMELL WITHIN A CLASS
+     * . The identify of the variable was _tl which is confusing in coding anything 
+     * as it doesn’t let me know what the variable was or what it does.
     
-    private ITaskList _tl = null;
+    */
+    private ITaskList _tasklist = null;
 
     /**
      * Constructor for DefaultTask.
      */
     public TaskImpl(Element taskElement, ITaskList tl) {
         _element = taskElement;
-        _tl = tl;
+        _tasklist = tl;
     }
 
     public Element getContent() {
@@ -61,7 +65,7 @@ public class TaskImpl implements ITask, Comparable {
 		ITask parent = this.getParentTask();
 		if (parent != null)
 			return parent.getEndDate();
-		IProject pr = this._tl.getProject();
+		IProject pr = this._tasklist.getProject();
 		if (pr.getEndDate() != null)
 			return pr.getEndDate();
 		return this.getStartDate();
@@ -101,7 +105,7 @@ public class TaskImpl implements ITask, Comparable {
     	if (parentNode instanceof Element) {
     	    Element parent = (Element) parentNode;
         	if (parent.getLocalName().equalsIgnoreCase("task")) 
-        	    return new TaskImpl(parent, _tl);
+        	    return new TaskImpl(parent, _tasklist);
     	}
     	return null;
 	}
@@ -236,7 +240,7 @@ public class TaskImpl implements ITask, Comparable {
         Elements deps = _element.getChildElements("dependsFrom");
         for (int i = 0; i < deps.size(); i++) {
             String id = deps.get(i).getAttribute("idRef").getValue();
-            ITask t = _tl.getTask(id);
+            ITask t = _tasklist.getTask(id);
             if (t != null)
                 v.add(t);
         }
@@ -365,7 +369,7 @@ public class TaskImpl implements ITask, Comparable {
 	private Collection convertToTaskObjects(Elements tasks) {
         Vector v = new Vector();
         for (int i = 0; i < tasks.size(); i++) {
-            ITask t = new TaskImpl(tasks.get(i), _tl);
+            ITask t = new TaskImpl(tasks.get(i), _tasklist);
             v.add(t);
         }
         return v;
@@ -378,7 +382,7 @@ public class TaskImpl implements ITask, Comparable {
 		Elements subTasks = _element.getChildElements("task");
 		for (int i = 0; i < subTasks.size(); i++) {
 			if (subTasks.get(i).getAttribute("id").getValue().equals(id))
-				return new TaskImpl(subTasks.get(i), _tl);
+				return new TaskImpl(subTasks.get(i), _tasklist);
 		}
 		return null;
 	}

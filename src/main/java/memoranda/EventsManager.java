@@ -87,7 +87,12 @@ public class EventsManager {
 			}
 		}
 	}
-
+	/*TASK 3-2 SMELL BETWEEN CLASSES
+	The identifier which I forgot the name of it was
+	 too long and was confusing in what it did.
+	 Renamed it so it made it more clear and shorter.
+	
+	*/
 	public static boolean doesEventExsist(CalendarDate date) {
 		Day d = getDay(date);
 		if (d == null)
