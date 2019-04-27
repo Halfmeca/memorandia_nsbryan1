@@ -19,7 +19,7 @@ import javax.swing.JTable;
 import main.java.memoranda.CurrentProject;
 import main.java.memoranda.EventsManager;
 import main.java.memoranda.date.CalendarDate;
-import main.java.memoranda.interfaces.Task;
+import main.java.memoranda.interfaces.ITask;
 /**
  *
  */
@@ -28,13 +28,13 @@ public class JNCalendarCellRenderer extends javax.swing.table.DefaultTableCellRe
     private CalendarDate d = null;
     boolean disabled = false;
     ImageIcon evIcon = new ImageIcon(main.java.memoranda.ui.AppFrame.class.getResource("/ui/icons/en.png"));
-    Task t = null;
+    ITask t = null;
     
-    public void setTask(Task _t) {
+    public void setTask(ITask _t) {
         t = _t;
     }
     
-    public Task getTask() {
+    public ITask getTask() {
         return t;
     }
 
@@ -103,7 +103,7 @@ public class JNCalendarCellRenderer extends javax.swing.table.DefaultTableCellRe
 			label.setBackground(Color.WHITE);
 				
 		// always display NREvents
-		if (EventsManager.isNREventsForDate(d))
+		if (EventsManager.doesEventExsist(d))
 			label.setIcon(evIcon);
 		else
 			label.setIcon(null);
