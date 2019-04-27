@@ -198,11 +198,13 @@ public class EventsManager {
 					//System.out.println((n - ns) % ev.getPeriod());
 					if ((n - ns) % ev.getPeriod() == 0)
 						v.add(ev);
-				} else if (ev.getRepeat() == REPEAT_WEEKLY && date.getCalendar().get(Calendar.DAY_OF_WEEK)
-                        == ev.getPeriod()) {
+				} else if (ev.getRepeat() == REPEAT_WEEKLY) {
+					if (date.getCalendar().get(Calendar.DAY_OF_WEEK)
+						== ev.getPeriod())
 						v.add(ev);
-				} else if (ev.getRepeat() == REPEAT_MONTHLY && date.getCalendar().get(Calendar.DAY_OF_MONTH)
-                        == ev.getPeriod()) {
+				} else if (ev.getRepeat() == REPEAT_MONTHLY) {
+					if (date.getCalendar().get(Calendar.DAY_OF_MONTH)
+						== ev.getPeriod())
 						v.add(ev);
 				} else if (ev.getRepeat() == REPEAT_YEARLY) {
 					int period = ev.getPeriod();
@@ -282,6 +284,7 @@ public class EventsManager {
 
 	private static Day getDay(CalendarDate date) {
 		Year y = getYear(date.getYear());
+<<<<<<< HEAD
 		
 		if (y == null )
 			return null;
@@ -293,6 +296,13 @@ public class EventsManager {
 		
 		
 
+=======
+		if (y == null)
+			return null;
+		Month m = y.getMonth(date.getMonth());
+		if (m == null)
+			return null;
+>>>>>>> parent of 790a209... Attempts at fixing Cyclomatic Complexity
 		return m.getDay(date.getDay());
 	}
 
@@ -306,7 +316,7 @@ public class EventsManager {
 		public int getValue() {
 			return new Integer(yearElement.getAttribute("year").getValue())
 				.intValue();
-		} 
+		}
 
 		public Month getMonth(int m) {
 			Elements ms = yearElement.getChildElements("month");
