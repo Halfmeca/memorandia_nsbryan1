@@ -284,25 +284,13 @@ public class EventsManager {
 
 	private static Day getDay(CalendarDate date) {
 		Year y = getYear(date.getYear());
-<<<<<<< HEAD
-		
-		if (y == null )
-			return null;
-		
-		Month m = y.getMonth(date.getMonth());
-		
-		if (m == null)
-		    return null;
-		
-		
 
-=======
 		if (y == null)
 			return null;
 		Month m = y.getMonth(date.getMonth());
 		if (m == null)
 			return null;
->>>>>>> parent of 790a209... Attempts at fixing Cyclomatic Complexity
+
 		return m.getDay(date.getDay());
 	}
 
